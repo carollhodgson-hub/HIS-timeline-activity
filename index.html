@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HIS-132 Timeline Builder</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f6f4ef;
+  padding: 20px;
+}
+.container {
+  max-width: 850px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+}
+h1 { color: #2f3e46; }
+select, textarea, button {
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+.description, .paragraph {
+  background: #eef3f7;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+button {
+  background: #2f3e46;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h1>HIS-132 American History II: Cause-and-Effect Timeline Builder</h1>
+
+  <label>Select a historical event:</label>
+  <select id="event" onchange="showDescription()">
+    <option value="">-- Choose an event --</option>
+    <option value="Reconstruction">Reconstruction</option>
+    <option value="Industrialization">Industrialization</option>
+    <option value="Great Depression">Great Depression</option>
+    <option value="Civil Rights Movement">Civil Rights Movement</option>
+    <option value="Vietnam War">Vietnam War</option>
+  </select>
+
+  <div id="description" class="description">
+    Select an event to see a short description.
+  </div>
+
+  <label>What caused this event or development?</label>
+  <textarea id="cause"></textarea>
+
+  <label>Who was affected?</label>
+  <textarea id="affected"></textarea>
+
+  <label>What changed because of it?</label>
+  <textarea id="change"></textarea>
+
+  <button onclick="buildParagraph()">Build My Historical Analysis Paragraph</button>
+
+<button onclick="window.print()">Save to PDF / Print</button>
+
+<div id="paragraph" class="paragraph"></div>
+
+  <div id="paragraph" class="paragraph"></div>
+</div>
+
+<script>
+const descriptions = {
+  "Reconstruction": "Reconstruction was the period after the Civil War when the United States attempted to rebuild the South and define freedom for formerly enslaved people.",
+  "Industrialization": "Industrialization transformed the United States through factories, railroads, urban growth, immigration, and new forms of labor.",
+  "Great Depression": "The Great Depression was a severe economic crisis that began in 1929 and deeply affected jobs, banks, families, and government policy.",
+  "Civil Rights Movement": "The Civil Rights Movement challenged racial segregation and discrimination, especially during the 1950s and 1960s.",
+  "Vietnam War": "The Vietnam War shaped American politics, foreign policy, protest movements, and public trust in government."
+};
+
+function showDescription() {
+  let event = document.getElementById("event").value;
+  document.getElementById("description").innerHTML = descriptions[event] || "Select an event to see a short description.";
+}
+
+function buildParagraph() {
+  let event = document.getElementById("event").value;
+  let cause = document.getElementById("cause").value;
+  let affected = document.getElementById("affected").value;
+  let change = document.getElementById("change").value;
+
+  document.getElementById("paragraph").innerHTML =
+    `<strong>Your Historical Analysis Paragraph:</strong><br><br>
+    The historical event I selected is <strong>${event}</strong>. 
+    This event was important because ${cause}. 
+    It affected ${affected}. 
+    As a result, ${change}. 
+    Overall, ${event} helps explain how American society changed during the period covered in HIS-132.`;
+}
+</script>
+</body>
+</html>
